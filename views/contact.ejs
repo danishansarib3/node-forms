@@ -1,0 +1,36 @@
+<div class="form-header">
+    <% if(Object.keys(error).length === 0) { %>
+        <h2>Send us a message</h2>
+        <% } else { %>
+            <h2 class="error-heading ">Opps! please correct the following:</h2>
+            <ul class="errors-list">
+                <% Object.values(errors).forEach(error => { %>
+                    <li>
+                        <%= error.msg %>
+                    </li>
+                    <% }) %>
+            </ul>
+</div>
+<form action="/contact " method="POST ">
+    <div class="form-field <%= errors.message ? 'form-field-invalid' : '' %>">
+        <label for="message ">Message</label>
+        <textarea class="input " name="message " id="message " rows="4 " autofocus><%= data.message %></textarea>
+        <% if (errors.message) { %>
+            <div class="error">
+                <%= errors.message.msg %>
+            </div>
+            <% } %>
+    </div>
+    <div class="form-field <%= errors.email ? 'form-field-invalid' : '' %>">
+        <label for="email ">Email</label>
+        <input type="email " class="input " name="email " id="email " value="<%= data.email %> " />
+        <% if (errors.email) { %>
+            <div class="error">
+                <%= errors.email.msg %>
+            </div>
+            <% } %>
+    </div>
+    <div class="form-actions ">
+        <button type="submit " class="btn ">Send</button>
+    </div>
+</form>
